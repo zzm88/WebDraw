@@ -13,8 +13,7 @@ const app = new Vue({
                 ],
 
                 [
-                    'test',
-                    'add',
+                    {"tool":"polyline","points":"630,231 632,234 632,236 634,239 638,245 643,254 648,260 656,270 661,278 672,291 680,302 896,406 896,406 663,400 ","width":5,"stroke":"#ff0000"}
                 ],
 
             ],
@@ -321,6 +320,14 @@ const app = new Vue({
             }
         }
     },
+    mounted(){
+        this.art = this.layers[0]
+    },
+    watch:{
+        currentLayer(newLayer){
+            this.art = this.layers[newLayer];
+        }
+    }
 });
 
 document.addEventListener("keydown", app.keydown);
