@@ -1,8 +1,14 @@
 const app = new Vue({
     el: '#app',
+
     data() {
         return {
-            art: [],
+            art: [
+                {"tool":"polyline","points":"344,256 344,256 344,256 343,258 341,262 340,265 338,268 334,275 329,284 323,297 317,312 311,325 302,344 295,358 288,370 ","width":5,"stroke":"#ff0000"}
+
+            ],
+            layers:[],
+            currentLayer: 0,
             name: 'draw',
             hamburger: false,
             help: false,
@@ -19,7 +25,15 @@ const app = new Vue({
             linecap: 'butt'
         }
     },
+    computed: {
+        current_layer(){
+            this.layers[this.currentLayer]=this.art;
+        }
+    },
     methods: {
+        changelayer(index){
+            this.currentLayer = index;
+        },
         // asign blob address of uploaded image to img
         onFileChange(event) {
             const file = event.target.files[0];
