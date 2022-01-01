@@ -13,7 +13,8 @@ const app = new Vue({
                 ],
 
                 [
-                    'test'
+                    'test',
+                    'add',
                 ],
 
             ],
