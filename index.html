@@ -54,7 +54,7 @@
                 <li title="Stroke Width" id="stroke-width"><input type="range" name="vol" min="0" max="50" v-model="strokeWidth"></li>
                 <li @click="trash" title="Trash"><i class="fas fa-trash-alt"></i></li>
                 <!-- v-for loop currentLayer times -->
-                <li v-for="(layer, index) in layers" @click="changelayer(index)" :title="index" @mouseover='fade_this' @mouseout="recover_from_fade">{{index }}</li>
+                <li v-for="(layer, index) in layers" :class="{activeTool: index == currentLayer}" @click="changelayer(index)" :title="index" @mouseover='fade_this' @mouseout="recover_from_fade">{{index }}</li>
             </ul>
             <ul class="itemOptions" v-if="hamburger">
                 <li @click="saveArt"><i class="fas fa-save"></i>Save</li>
