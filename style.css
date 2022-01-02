@@ -141,3 +141,10 @@ svg *{
         display: none;
     }
 }
+
+.working_layer{
+    /* opacity: 1 !important; */
+}
+.transparent{
+    opacity: 0.3;
+}

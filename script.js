@@ -35,11 +35,54 @@ const app = new Vue({
         }
     },
     computed: {
+ 
         current_layer(){
             this.layers[this.currentLayer]=this.art;
         }
     },
     methods: {
+        fade_this(event){
+            //get svg
+            let svg = document.querySelector('svg');
+            //add class transparent to svg
+            console.log(event.target.title);
+            var current_layer_id = 'layer'+event.target.title;
+            //get current layer by id
+            var current_layer = document.getElementById(current_layer_id);
+            //add class working_layer to current layer
+            // current_layer.classList.add('transparent');
+            //loop through all layers
+            // debugger;
+            for(var i=0; i<this.layers.length; i++){
+                //get layer by id
+                var layer = document.getElementById('layer'+i);
+                //remove class working_layer from all layers
+                //pass if current layer
+                if(layer.id != current_layer_id){
+                    layer.classList.add('transparent');
+                }
+            }
+        
+        },
+        recover_from_fade(event){  
+            //get svg
+            let svg = document.querySelector('svg');
+            //remove class transparent to svg
+            var current_layer_id = 'layer'+event.target.title;
+            // var current_layer_id = 'layer'+this.currentLayer;
+            //get current layer by id
+            var current_layer = document.getElementById(current_layer_id);
+            //remove class working_layer to current layer
+            current_layer.classList.remove('transparent');
+            for(var i=0; i<this.layers.length; i++){
+                //get layer by id
+                var layer = document.getElementById('layer'+i);
+                //remove class working_layer from all layers
+                //pass if current layer
+                layer.classList.remove('transparent');
+            }
+
+        },
         changelayer(index){
             this.currentLayer = index;
         },
@@ -324,9 +367,20 @@ const app = new Vue({
         this.art = this.layers[0]
     },
     watch:{
-        currentLayer(newLayer){
+        currentLayer(newLayer,oldLayer){
             this.art = this.layers[newLayer];
+            var current_layer_id = "layer"+this.currentLayer;
+            var old_layer_id = "layer"+oldLayer;
+            //get elem by id
+            var current_layer_obj = document.getElementById(current_layer_id);
+            var old_layer_obj = document.getElementById(old_layer_id);
+            //add class working_layer to current layer
+            current_layer_obj.classList.add("working_layer");
+            //remove class working_layer from old layer
+            old_layer_obj.classList.remove("working_layer");
+            
         }
+
     }
 });
 

@@ -53,6 +53,8 @@
                 </li>
                 <li title="Stroke Width" id="stroke-width"><input type="range" name="vol" min="0" max="50" v-model="strokeWidth"></li>
                 <li @click="trash" title="Trash"><i class="fas fa-trash-alt"></i></li>
+                <!-- v-for loop currentLayer times -->
+                <li v-for="(layer, index) in layers" @click="changelayer(index)" :title="index" @mouseover='fade_this' @mouseout="recover_from_fade">{{index }}</li>
             </ul>
             <ul class="itemOptions" v-if="hamburger">
                 <li @click="saveArt"><i class="fas fa-save"></i>Save</li>
@@ -74,8 +76,9 @@
         <svg class="artboard pencil" 
             :style="{'background-color' : dark ? 'black' : 'white', cursor: `url('./cursors/${tool}.png'), auto`}" 
             @mousemove="move" @mousedown="start">
-
-            <template v-for="tool in art">
+<template v-for="(layer,index) in layers">  
+    <g style="" :id='"layer"+index'>
+            <template v-for="tool in layer">
                 <rect v-if="tool.tool == 'rect'"
                     :x="tool.x"
                     :y="tool.y"
@@ -124,6 +127,8 @@
                 <image v-if="tool.tool == 'img'" :href="tool.img" :x="tool.x" :y="tool.y" :width="tool.width + 'px'"/ :style="{transform: `rotate(${tool.rotate}deg)`}">
 
             </template>
+        </g>
+</template>
         </svg>
     </div>
     </body>
